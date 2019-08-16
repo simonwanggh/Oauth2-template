@@ -12,19 +12,19 @@ import com.zihong.web.feignclient.TrafficClient;
 @RequestMapping("/traffic")
 public class TrafficController {
 	
-//	@Autowired
-//    private OAuth2RestTemplate oAuth2RestTemplate;
+	@Autowired
+    private OAuth2RestTemplate oAuth2RestTemplate;
 	
 	@Autowired
     private RestTemplate restTemplate;
 	
-	@Autowired
-    private TrafficClient trafficClient;
+//	@Autowired
+//    private TrafficClient trafficClient;
 	
 	@RequestMapping("/accounts/account")
 	public String getAccount() {
-//		return oAuth2RestTemplate.getForObject("http://localhost:8888/platform/accounts/account", String.class);
-		return trafficClient.getAccount();
+		return oAuth2RestTemplate.getForObject("http://localhost:8888/platform/accounts/account", String.class);
+//		return trafficClient.getAccount();
 	}
 
 }

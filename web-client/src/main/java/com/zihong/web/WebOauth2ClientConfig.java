@@ -21,13 +21,13 @@ import feign.RequestTemplate;
 @EnableOAuth2Client
 public class WebOauth2ClientConfig {
 
-//	@Autowired
-//	private OAuth2ClientContext oauth2ClientContext;
-//
-//	@Bean
-//	public OAuth2RestTemplate restTemplate() {
-//		return new OAuth2RestTemplate(new AuthorizationCodeResourceDetails(), oauth2ClientContext);
-//	}
+	@Autowired
+	private OAuth2ClientContext oauth2ClientContext;
+
+	@Bean
+	public OAuth2RestTemplate restTemplate() {
+		return new OAuth2RestTemplate(new AuthorizationCodeResourceDetails(), oauth2ClientContext);
+	}
 	
 	private static final String AUTHORIZATION_HEADER = "Authorization";
 	private static final String BEARER_TOKEN_TYPE = "Bearer";
@@ -50,10 +50,10 @@ public class WebOauth2ClientConfig {
 		};
 	}
 	
-	@LoadBalanced
-	@Bean
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
+//	@LoadBalanced
+//	@Bean
+//	public RestTemplate restTemplate() {
+//		return new RestTemplate();
+//	}
 
 }
