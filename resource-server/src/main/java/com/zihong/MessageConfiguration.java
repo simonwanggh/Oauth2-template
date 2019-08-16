@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.zihong.messaging.Receiver;
 
-@Configuration
+//@Configuration
 public class MessageConfiguration {
 	
 	static final String topicExchangeName = "spring-boot-exchange";
