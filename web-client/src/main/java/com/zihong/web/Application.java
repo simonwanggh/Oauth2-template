@@ -11,7 +11,7 @@ import org.springframework.web.context.request.RequestContextListener;
 
 @SpringBootApplication
 //@EnableDiscoveryClient
-@EnableFeignClients
+//@EnableFeignClients
 //@PropertySource("classpath:application-discovery.properties")
 public class Application  extends SpringBootServletInitializer {
 	
