@@ -16,8 +16,7 @@ import org.springframework.stereotype.Service;
 @Qualifier("dbUserService")
 public class DBUserService implements UserDetailsService {
 	
-	@Autowired
-	
+
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
