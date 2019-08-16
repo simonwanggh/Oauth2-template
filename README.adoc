@@ -1,0 +1,105 @@
+:spring_version: current
+:toc:
+:project_id: zihong-services
+:icons: font
+:source-highlighter: prettify
+
+This guide walks you through the process of building a zihong images for running a Spring Boot application.
+
+== What you'll build
+
+https://docker.com[Docker] is a Linux container management toolkit with a "social" aspect, allowing users to publish container images and consume those published by others. A Docker image is a recipe for running a containerized process, and in this guide we will build one for a simple Spring boot application.
+
+== Needed
+:java_version: 1.8
+:Axon Server : 4.1
+----
+docker pull zihong/authserver
+docker run -d --name my-auth-server -p 8024:8024 -p 8124:8124 zihong/authserver
+http://192.168.99.100:8024
+----
+:redis : latest
+
+Using Gradle, please execute:
+
+[subs="attributes"]
+----
+./gradlew build && java -jar build/libs/{project_id}-0.0.1.jar
+----
+
+Using Maven, please execute:
+
+[subs="attributes"]
+----
+./mvnw package && java -jar target/{project_id}-0.0.1.jar
+----
+
+and go to http://localhost:8080[localhost:8080] to get login.
+
+== Containerize It
+
+
+
+You can build a tagged docker image using the command line like this:
+
+----
+$ ./mvnw install dockerfile:build
+----
+
+And you can push the image to dockerhub with `./mvnw dockerfile:push`.
+
+
+You can build a tagged docker image and then push it to a remote repository with Gradle in one command:
+
+----
+$ ./gradlew build docker
+----
+
+=== After the Push
+
+
+----
+$ docker run -p 8081:8081 -t zihong/zihong-idm
+....
+
+====
+
+The application is then available on http://localhost:8080 . 
+
+
+You can see containers, e.g:
+
+----
+$ docker ps
+----
+
+and to shut it down again you can `docker stop` with the container ID :
+
+----
+$ docker stop 96969996996
+----
+
+Delete the container 
+----
+$ docker rm 96969996996
+----
+
+=== Using Spring Profiles
+----
+$ docker run -e "SPRING_PROFILES_ACTIVE=prod" -p 8080:8080 -t zihong/zihong-idm
+----
+
+or
+
+----
+$ docker run -e "SPRING_PROFILES_ACTIVE=dev" -p 8080:8080 -t zihong/zihong-idm
+----
+
+=== Debugging the application in a Docker container
+
+----
+$ docker run -e "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,address=9999,server=y,suspend=n" -p 8080:8080 -p 5005:5005 -t zihong/zihong-id
+----
+
+
+

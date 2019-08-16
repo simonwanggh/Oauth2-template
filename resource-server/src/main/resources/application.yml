@@ -1,0 +1,49 @@
+server:
+  port: 8090
+  servlet:
+      context-path: /traffic
+  
+security:
+  oauth2:
+    client:
+      clientId: We@lthW@yClientId
+      clientSecret: W@u&Jl2OPD
+      #accessTokenUri: http://ww-idm:8081/oauth/token
+      #userAuthorizationUri: http://ww-idm:8081/oauth/authorize
+      accessTokenUri: http://localhost:8081/oauth/token
+      userAuthorizationUri: http://localhost:8081/oauth/authorize
+    resource:
+      #userInfoUri: http://ww-idm:8081/user
+      userInfoUri: http://localhost:8081/user
+
+#TODO: figure out why I need this here and in bootstrap.yml
+#spring.h2.console.enabled=true
+#spring.h2.console.path=/h2-console
+spring:
+  application:
+    name: resourceserver
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  rabbitmq:
+    addresses: 192.168.99.100:5672
+    username: guest
+    password: guest
+      
+#axon.axonserver.servers=${vcap.services.AxonServer.credentials.uri:47.111.18.121}
+axon:
+  axonserver:
+    servers:axonserver      
+      
+ribbon:
+  ServerListRefreshInterval: 1000
+
+endpoints:
+  health:
+    sensitive: false
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+    

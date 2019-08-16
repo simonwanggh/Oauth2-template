@@ -1,0 +1,19 @@
+oauth2:
+  redirecturis: @redirect.uris@
+  
+  
+mybatis-plus:
+  configuration:
+    cache-enabled: true
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*Mapper.xml
+  global-config:
+    db-config:
+      logic-not-delete-value: 1
+      table-underline: true
+      field-strategy: NOT_EMPTY
+      logic-delete-value: 0
+      db-type: mysql
+      id-type: ID_WORKER
+    refresh: true
+  

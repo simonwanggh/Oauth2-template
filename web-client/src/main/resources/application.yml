@@ -1,0 +1,41 @@
+server:
+  port: 8080
+  servlet:
+      context-path: /zihong
+  session:
+      cookie:
+        name: UISESSION
+  
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      clientId: We@lthW@yClientId
+      clientSecret: W@u&Jl2OPD
+      accessTokenUri: http://@idm.host@/oauth/token
+      userAuthorizationUri: http://@idm.host@/oauth/authorize
+    resource:
+      userInfoUri: http://@idm.host@/user
+
+#TODO: figure out why I need this here and in bootstrap.yml
+spring:
+  application:
+    name: webclient
+  thymeleaf:
+    cache: false
+
+ribbon:
+  ServerListRefreshInterval: 1000
+
+endpoints:
+  health:
+    sensitive: false
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+    
+
+         
+        

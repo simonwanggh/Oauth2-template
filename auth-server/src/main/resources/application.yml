@@ -1,0 +1,99 @@
+server:
+  port: 8081
+
+#TODO: figure out why I need this here and in bootstrap.yml
+#spring.resources.static-locations=classpath:/static/
+spring:
+  application:
+    name: auth-server
+  datasource:
+    username: @mysql.username@
+    password: @mysql.password@
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://@mysql.host@/db_zihong_saas?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
+  redis:
+    database: 0
+    host: @redis.host@
+    port: @redis.port@
+    password:
+    pool.max-active: 8
+    pool.max-wait: -1
+    pool.max-idle: 8
+    pool.min-idle: 0
+    timeout: 5000
+  cache:
+    type: redis
+    cache-names: passwordCache
+    redis:
+      time-to-live: 600000
+  resources:
+    static-locations: classpath:/static/
+  rabbitmq:
+    addresses: @rabbitmq.addresses@
+    username: @rabbitmq.username@
+    password: @rabbitmq.password@
+
+ribbon:
+  ServerListRefreshInterval: 1000
+
+endpoints:
+  health:
+    sensitive: false
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+
+security:
+  basic:
+    enabled: false
+    
+credential:
+ client-credential:
+   client-id: 'We@lthW@yClientId'
+   secret: '$2a$10$tj/fP8VrQsY/OaN4QzyPRefTfYmsA964Pey/uP1EYrN5pSf3NXKBS'
+ service-account:
+   user-name: 'We@lthService'
+   password: '$2a$10$dRDEB3vvGL99B5Xr0CdRheN2rdNOA9SJwOe4Q/ub23BUQPEA1xgx2'
+   
+restclient:
+   timeout: 5000
+   
+miaodiclient:
+
+
+github:
+  client:
+    clientId: 1243c6be366c5103c546
+    clientSecret: 3d61ffccb8db4af75be6ab73fee545a6ece70efc
+    accessTokenUri: https://github.com/login/oauth/access_token
+    userAuthorizationUri: https://github.com/login/oauth/authorize
+    clientAuthenticationScheme: form
+  resource:
+    userInfoUri: https://api.github.com/user
+    
+wechat:
+  client:
+    clientId: [your app id]
+    clientSecret: [you app secret]
+    accessTokenUri: https://api.weixin.qq.com/sns/oauth2/access_token
+    userAuthorizationUri: https://open.weixin.qq.com/connect/oauth2/authorize
+    tokenName: access_token
+    authenticationScheme: query
+    clientAuthenticationScheme: form
+    scope: snsapi_userinfo
+  resource:
+    userInfoUri: https://api.weixin.qq.com/sns/userinfo
+  fake:
+    username: Wech@t8e^yu^F@ke
+    password: Wech@t8e^yu^P@ssw0rd
+  qrCodeUrl: @weixin.qrcodeurl@
+    
+jwt:
+  secret:
+    key: @jwt.key@
+    
+    
+    
+
