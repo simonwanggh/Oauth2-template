@@ -114,7 +114,7 @@ public class OAuth2SecurityConfig extends WebSecurityConfigurerAdapter {
         .invalidateHttpSession(true)
         .deleteCookies("JSESSIONID");
 	
-        http.csrf().disable();
+        //http.csrf().disable();
 	
 	}
 	
